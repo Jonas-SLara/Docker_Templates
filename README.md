@@ -78,4 +78,8 @@ WORDPRESS_DB_NAME=railway
 
     Acesse o link gerado para instalar e configurar o WordPress online.
  
-
+##OBSERVAÇÕES IMPORTANTES
+  é importante que tenha o .dockerignore no repositorio do github, não exclua ele, pois
+ quando é feito o deploy no railway o dockercompose.yml deve ser ignorado pois não há
+ suporte para orquestrar varios containers de uma só vez, o build deve ser de um só container
+ no caso do dockerfile
