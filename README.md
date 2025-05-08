@@ -1,40 +1,81 @@
-
 # Projeto WordPress no Railway
 
-Este repositório contém a estrutura Docker para o nosso site WordPress, usado para desenvolvimento e prototipagem.
+Este repositório contém a estrutura Docker para o nosso site WordPress, usado para desenvolvimento e prototipagem do site do time verde.
 
-## Como baixar o Repositorio ,nescessario ter o git instalado
-no terminal digite 
-git init
-git clone (link do repositorio)
+---
 
+## Pré-requisitos 
 
-## Como rodar localmente
+Para rodar o projeto localmente ou fazer o deploy no Railway, você precisa ter:
 
-```bash
-docker compose up -d
-no navegador acesse localhost:8080 ou http://localhost:8080
+- Git instalado
+- Docker e Docker Compose (para rodar localmente)
+- Conta gratuita no [Railway](https://railway.app)
 
-revise os comando do docker para parar e excluir containers
-docker compose down 
-docker compose stop
-docker compose start
+---
+
+## Como baixar o repositório
+
+Abra o terminal e execute:
+
+bash
+- git clone https://github.com/usuario/nome-do-repositorio.git
+- cd nome-do-repositorio
+
+---
+
+### COMO RODAR LOCALMENTE
+ Com Docker e Docker Compose instalados, rode:
+- docker compose up -d
+  
+ No navegador acesse:
+- http://localhost:8080
+
+ Parar e remover os containers:
+- docker compose stop         # apenas pausa
+- docker compose start        # reinicia
+- docker compose down         # remove tudo
+
+### COMO HOSPEDAR NO RAILWAY (SERVIDOR REMOTO)
+1. Crie um projeto no Railway
+
+    Acesse https://railway.app e faça login.
+
+    Clique em "New Project" → Deploy from GitHub repo
+
+    Escolha o seu repositório com o Dockerfile (FROM wordpress:latest).
+   
+2. Configure o serviço WordPress (Docker)
+
+    O Railway detectará o Dockerfile automaticamente.
+
+    Dê um nome para o serviço (ex: wordpress-app).
+
+3. Adicione um banco de dados
+
+    Clique em "New" > "Provision PostgreSQL" ou "Provision MySQL" (escolha MySQL/MariaDB).
+
+    Aguarde a criação do banco.
+
+    Copie as variáveis de ambiente geradas: MYSQLHOST, MYSQLUSER, MYSQLPASSWORD, MYSQLDATABASE, etc.
+
+4. Configure variáveis de ambiente no serviço WordPress
+WORDPRESS_DB_HOST=<host>:<port>
+WORDPRESS_DB_USER=<usuário>
+WORDPRESS_DB_PASSWORD=<senha>
+WORDPRESS_DB_NAME=<nome do banco>
+
+Use os valores do serviço MySQL do Railway. Exemplo:
+
+WORDPRESS_DB_HOST=containers-us-west-123.railway.app:1234
+WORDPRESS_DB_USER=railway
+WORDPRESS_DB_PASSWORD=senha_gerada
+WORDPRESS_DB_NAME=railway
+
+5. Gere o domínio do seu site WordPress
+
+    No serviço wordpress-app, clique em "Settings" → "Generate Domain".
+
+    Acesse o link gerado para instalar e configurar o WordPress online.
  
-# exportar e importar o xml localmente ou externo
--- guardar o xml das alterações feitas dentro da pasta wp_data e dar o push ou pull request no repositorio
-
-## Como rodar o wordpress pelo railway
-no railway vai criar um novo projeto
-depois crie um serviço apartir de um repositorio e use este que tenha o dockerfile ou uma copia dele
-crie um novo serviço para o banco de dados
-copie as variaves do banco de dados para a conexao como host user db e password
-inicialize as variaveis de ambiente com os valores que copiou no serviço wordpress para que ele se conecte com o banco
-depois é só gerar uma url
-
-##como acessar o wordpress com a url do railway
-https://seu link.up.railway.app/ -vai para a instalação caso nao instalou ainda e depois para o login
-se ja estiver instalado ele vai para a pagina do site
-caso seja um colaborador ou admin e quer acessar para poder editar coloque /wp-admin ou /wp-login.php no final
-
-
 
