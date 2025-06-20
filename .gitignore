@@ -1,0 +1,2 @@
+/mongoDB_docker/data/*
+!/mongoDB_docker/data/.gitkeep

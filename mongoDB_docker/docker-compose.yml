@@ -1,0 +1,14 @@
+services:
+  mongodb:
+    #versão compátivel para máquinas mais antigas que nao suportam avx
+    image: mongo:4.4
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root1234
+    restart: always
+
